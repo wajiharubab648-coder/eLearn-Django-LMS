@@ -1,2 +1,4 @@
+*.js linguist-detectable=false
 *.css linguist-detectable=false
 static/* linguist-vendored
+plugins/* linguist-vendored
