@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- About Section -->
+    <div class="about" style="padding-top: 130px; padding-bottom: 80px;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section_title text-center"><h2>About Our Academic Platform</h2></div>
+                    <div class="section_subtitle text-center mt-2">Empowering developers through modern software engineering education.</div>
+                </div>
+            </div>
+
+            <!-- Platform Goal Row -->
+            <div class="row about_row" style="margin-top: 50px;">
+                <div class="col-lg-6">
+                    <div class="about_content">
+                        <div class="about_title"><h3 style="color: #2e2151; font-weight: 700;">Our Mission & Vision</h3></div>
+                        <div class="about_text mt-3" style="color: #6c757d; line-height: 1.8;">
+                            <p>eLearn is designed to bridge the gap between theoretical knowledge and real-world backend development. We provide structured learning paths focusing on Python backend engineering, web frameworks like Django and Flask, and efficient database architectures using SQLite and SQL.</p>
+                            <p>Whether you are learning core Object-Oriented Programming (OOP) concepts, building RESTful APIs, or working on full-stack web applications, our platform delivers practical tutorials, structured course materials, and interactive project modules.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about_image">
+                        <img src="{% static 'images/about_1.jpg' %}" alt="About eLearn" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Milestones / Counter Section -->
+    <div class="milestones" style="background-color: #2e2151; padding: 60px 0; color: #ffffff;">
+        <div class="container">
+            <div class="row">
+
+                <!-- Milestone item -->
+                <div class="col-lg-3 col-md-6 milestone_col text-center mb-4 mb-lg-0">
+                    <div class="milestone_icon mb-2"><i class="fa fa-book fa-2x" style="color: #ff8a00;"></i></div>
+                    <div class="milestone_counter" style="font-size: 36px; font-weight: 700;">15+</div>
+                    <div class="milestone_text" style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Active Courses</div>
+                </div>
+
+                <!-- Milestone item -->
+                <div class="col-lg-3 col-md-6 milestone_col text-center mb-4 mb-lg-0">
+                    <div class="milestone_icon mb-2"><i class="fa fa-users fa-2x" style="color: #ff8a00;"></i></div>
+                    <div class="milestone_counter" style="font-size: 36px; font-weight: 700;">500+</div>
+                    <div class="milestone_text" style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Enrolled Students</div>
+                </div>
+
+                <!-- Milestone item -->
+                <div class="col-lg-3 col-md-6 milestone_col text-center mb-4 mb-lg-0">
+                    <div class="milestone_icon mb-2"><i class="fa fa-code fa-2x" style="color: #ff8a00;"></i></div>
+                    <div class="milestone_counter" style="font-size: 36px; font-weight: 700;">100+</div>
+                    <div class="milestone_text" style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Projects Built</div>
+                </div>
+
+                <!-- Milestone item -->
+                <div class="col-lg-3 col-md-6 milestone_col text-center mb-4 mb-lg-0">
+                    <div class="milestone_icon mb-2"><i class="fa fa-graduation-cap fa-2x" style="color: #ff8a00;"></i></div>
+                    <div class="milestone_counter" style="font-size: 36px; font-weight: 700;">100%</div>
+                    <div class="milestone_text" style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Practical Learning</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructors Section -->
+    <div class="teachers" style="padding: 80px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section_title text-center"><h2>Platform Instructors</h2></div>
+                    <div class="section_subtitle text-center mt-2">Learn from experienced developers and educators.</div>
+                </div>
+            </div>
+            <div class="row teachers_row mt-5">
+
+                <!-- Instructor Card 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="teacher text-center p-4" style="background: #f8f9fa; border-radius: 8px;">
+                        <div class="teacher_image mb-3">
+                            <img src="{% static 'images/auther.jpeg' %}" alt="Lead Developer" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">
+                        </div>
+                        <div class="teacher_body">
+                            <div class="teacher_name"><h4 style="color: #2e2151; font-weight: 600;">Zimal Fatima</h4></div>
+                            <div class="teacher_title" style="color: #ff8a00; font-size: 14px; font-weight: 600;">Python & Django Lead</div>
+                            <div class="teacher_text mt-2" style="color: #6c757d; font-size: 14px;">Specializes in Python backend architectures, database modeling, and web integration.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Card 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="teacher text-center p-4" style="background: #f8f9fa; border-radius: 8px;">
+                        <div class="teacher_image mb-3">
+                            <img src="{% static 'images/course_author_2.jpg' %}" alt="Web Developer" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">
+                        </div>
+                        <div class="teacher_body">
+                            <div class="teacher_name"><h4 style="color: #2e2151; font-weight: 600;">Backend Engineering Team</h4></div>
+                            <div class="teacher_title" style="color: #ff8a00; font-size: 14px; font-weight: 600;">Software Engineering</div>
+                            <div class="teacher_text mt-2" style="color: #6c757d; font-size: 14px;">Focused on web security, REST API developments, and scalable system design.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Card 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="teacher text-center p-4" style="background: #f8f9fa; border-radius: 8px;">
+                        <div class="teacher_image mb-3">
+                            <img src="{% static 'images/course_author_3.jpg' %}" alt="Database Admin" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">
+                        </div>
+                        <div class="teacher_body">
+                            <div class="teacher_name"><h4 style="color: #2e2151; font-weight: 600;">Database Specialists</h4></div>
+                            <div class="teacher_title" style="color: #ff8a00; font-size: 14px; font-weight: 600;">Data Architecture</div>
+                            <div class="teacher_text mt-2" style="color: #6c757d; font-size: 14px;">Expertise in SQLite, PostgreSQL, and relational database schema creation.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

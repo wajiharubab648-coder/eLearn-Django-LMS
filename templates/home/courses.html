@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Main Section with Clean Background -->
+<div class="courses-wrapper" style="background: #f1f5f9; padding-top: 140px; padding-bottom: 90px; min-height: 100vh;">
+    <div class="container">
+
+        <!-- Header Title -->
+        <div class="row text-center mb-4">
+            <div class="col-lg-8 offset-lg-2">
+                <h1 style="color: #1e293b; font-weight: 800; font-size: 38px; letter-spacing: -0.5px;">Explore Our Courses</h1>
+                <p style="color: #64748b; font-size: 16px; margin-top: 8px;">Discover top courses created by experienced instructors and expand your skills.</p>
+            </div>
+        </div>
+
+        <!-- Search & Category Filter Box -->
+        <div class="row mb-5">
+            <div class="col-lg-10 offset-lg-1">
+                <div style="background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+                    <form action="{% url 'courses' %}" method="GET" class="row g-3 align-items-center">
+
+                        <!-- Search Input -->
+                        <div class="col-md-7 mb-3 mb-md-0">
+                            <input type="search" name="search_query" class="form-control" placeholder="Search by Title, Description, or Instructor..." value="{{ request.GET.search_query }}" style="height: 50px; border-radius: 8px; border: 1px solid #cbd5e1; padding-left: 18px; font-size: 15px; color: #1e293b;" required>
+                        </div>
+
+                        <!-- Search Button -->
+                        <div class="col-md-5">
+                            <button type="submit" class="btn w-100" style="height: 50px; background-color: #ff8a00; color: #ffffff; font-weight: 700; border-radius: 8px; font-size: 15px; border: none; box-shadow: 0 4px 12px rgba(255, 138, 0, 0.3);">
+                                Search Course <i class="fa fa-angle-right ml-1"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Dynamic Categories Filter Dropdown -->
+                    <div class="mt-3 pt-3 border-top text-center">
+                        <form action="{% url 'courses' %}" method="GET" class="d-inline-block">
+                            <select name="category" class="custom-select" onchange="this.form.submit()" style="height: 42px; border-radius: 6px; border: 1px solid #cbd5e1; padding: 0 35px 0 15px; color: #334155; font-weight: 600; cursor: pointer; background-color: #f8fafc;">
+                                <option value="">-- All Categories --</option>
+                                {% if categories %}
+                                    {% for cat in categories %}
+                                        <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ cat.name }}
+                                        </option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option value="python">Python Programming</option>
+                                    <option value="web">Full Stack Web Development</option>
+                                {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Cards List -->
+        <div class="row">
+            {% if courses %}
+                {% for course in courses %}
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div style="background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <!-- Category Badge & Price -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge" style="background-color: #ff8a00; color: #ffffff; font-size: 12px; padding: 6px 12px; border-radius: 6px; font-weight: 600;">
+                                        {{ course.category.name|default:"Python Programming" }}
+                                    </span>
+                                    <span style="color: #10b981; font-weight: 700; font-size: 14px;">Free</span>
+                                </div>
+
+                                <!-- Course Title -->
+                                <h3 style="color: #0f172a; font-weight: 700; font-size: 20px; margin-bottom: 12px; line-height: 1.4;">
+                                    {{ course.title }}
+                                </h3>
+
+                                <!-- Description -->
+                                <p style="color: #475569; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">
+                                    {{ course.description|truncatewords:22 }}
+                                </p>
+
+                                <!-- Instructor Info -->
+                                <div style="font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 20px;">
+                                    <i class="fa fa-user-circle mr-1" style="color: #ff8a00;"></i> By {{ course.instructor.first_name|default:"zimal fatima" }}
+                                </div>
+                            </div>
+
+                            <!-- Buttons: Watch Lessons & Enroll Now -->
+                            <div class="d-flex justify-content-between align-items-center pt-3" style="border-top: 1px solid #f1f5f9;">
+                                <!-- Updated: Link changed from course_detail to course_player -->
+                                <a href="{% url 'course_player' course.id %}" class="btn" style="background-color: #1e293b; color: #ffffff; width: 48%; font-weight: 600; padding: 11px 0; border-radius: 6px; font-size: 14px; text-align: center; border: none;">
+                                    Watch Lessons
+                                </a>
+                                <a href="{% url 'enroll_course' course.id %}" class="btn" style="background-color: #2563eb; color: #ffffff; width: 48%; font-weight: 600; padding: 11px 0; border-radius: 6px; font-size: 14px; text-align: center; border: none;">
+                                    Enroll Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center py-5">
+                    <h4 style="color: #64748b;">No courses found matching your search or category.</h4>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Pagination UI -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <div class="pagination-wrapper d-inline-block">
+                    {% if courses.has_previous %}
+                        <a href="?page={{ courses.previous_page_number }}{% if search_query %}&search_query={{ search_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}" class="btn btn-outline-primary btn-sm mr-2">&laquo; Previous</a>
+                    {% endif %}
+
+                    <span class="mx-2 font-weight-bold" style="color: #2e2151;">
+                        Page {{ courses.number }} of {{ courses.paginator.num_pages }}
+                    </span>
+
+                    {% if courses.has_next %}
+                        <a href="?page={{ courses.next_page_number }}{% if search_query %}&search_query={{ search_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}" class="btn btn-outline-primary btn-sm ml-2">Next &raquo;</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

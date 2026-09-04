@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Home Slider Section -->
+    <div class="home">
+        <div class="home_slider_container">
+            <div class="owl-carousel owl-theme home_slider">
+
+                <!-- Slider Item 1 -->
+                <div class="owl-item">
+                    <div class="home_slider_background" style="background-image:url({% static 'images/index.jpg' %})"></div>
+                    <div class="home_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="home_content text-center">
+                                        <div class="home_logo"><img src="{% static 'images/home_logo.png' %}" alt=""></div>
+                                        <div class="home_text">
+                                            <div class="home_title">Complete Online Learning</div>
+                                            <div class="home_subtitle">Master Python backend engineering, web frameworks, and modern software development with interactive modules.</div>
+                                        </div>
+                                        <div class="home_buttons">
+                                            <div class="button home_button"><a href="{% url 'about' %}">learn more<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                                            <div class="button home_button"><a href="{% url 'courses' %}">see all courses<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Item 2 -->
+                <div class="owl-item">
+                    <div class="home_slider_background" style="background-image:url({% static 'images/index.jpg' %})"></div>
+                    <div class="home_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="home_content text-center">
+                                        <div class="home_logo"><img src="{% static 'images/home_logo.png' %}" alt=""></div>
+                                        <div class="home_text">
+                                            <div class="home_title">Build Practical Web Apps</div>
+                                            <div class="home_subtitle">Learn database management, Django development, and core backend logic through real-world projects.</div>
+                                        </div>
+                                        <div class="home_buttons">
+                                            <div class="button home_button"><a href="{% url 'about' %}">learn more<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                                            <div class="button home_button"><a href="{% url 'courses' %}">see all courses<div class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></div></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Course Section -->
+    <div class="featured">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="featured_container">
+                        <div class="row">
+                            <div class="col-lg-6 featured_col">
+                                <div class="featured_content">
+                                    <div class="featured_header d-flex flex-row align-items-center justify-content-start">
+                                        <div class="featured_tag"><a href="#">Featured</a></div>
+                                        <div class="featured_price ml-auto">Free</div>
+                                    </div>
+                                    <div class="featured_title"><h3><a href="#">Python Backend Engineering</a></h3></div>
+                                    <div class="featured_text">Build production-grade backend applications using Python, Django, SQLite, and Web APIs.</div>
+                                    <div class="featured_footer d-flex align-items-center justify-content-start mt-4">
+                                        <div class="featured_author_image"><img src="{% static 'images/featured_author.jpg' %}" alt=""></div>
+                                        <div class="featured_author_name">By <a href="#">Lead Instructor</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 featured_col">
+                                <div class="featured_background" style="background-image:url({% static 'images/featured.jpg' %})"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Listing Section -->
+    <div class="courses">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="section_title text-center"><h2>Choose Your Course</h2></div>
+                    <div class="section_subtitle text-center mt-2">Explore available tech and programming tracks designed for developers.</div>
+                </div>
+            </div>
+
+            <!-- Functional Search Bar -->
+            <div class="row mt-4 mb-5">
+                <div class="col">
+                    <div class="course_search">
+                        <form action="{% url 'courses' %}" method="GET" class="course_search_form d-flex flex-md-row flex-column align-items-start justify-content-between">
+                            <div>
+                                <input type="text" name="search_query" class="course_input" placeholder="Search Course (e.g. Python, Web)" value="{{ search_query }}">
+                            </div>
+                            <button type="submit" class="course_button">
+                                <span>search course</span>
+                                <span class="button_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Cards Grid -->
+            <div class="row courses_row">
+                {% if courses %}
+                    {% for course in courses %}
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="course">
+                                <div class="course_image">
+                                    {% if course.image %}
+                                        <img src="{{ course.image.url }}" alt="{{ course.title }}" style="width: 100%; height: 220px; object-fit: cover;">
+                                    {% elif forloop.counter == 1 %}
+                                        <img src="{% static 'images/course_1.jpg' %}" alt="{{ course.title }}" style="width: 100%; height: 220px; object-fit: cover;">
+                                    {% elif forloop.counter == 2 %}
+                                        <img src="{% static 'images/course_2.jpg' %}" alt="{{ course.title }}" style="width: 100%; height: 220px; object-fit: cover;">
+                                    {% else %}
+                                        <img src="{% static 'images/course_3.jpg' %}" alt="{{ course.title }}" style="width: 100%; height: 220px; object-fit: cover;">
+                                    {% endif %}
+                                </div>
+                                <div class="course_body">
+                                    <div class="course_header d-flex flex-row align-items-center justify-content-start">
+                                        <div class="course_tag">
+                                            <a href="#">{% if course.category %}{{ course.category.name }}{% else %}Tech{% endif %}</a>
+                                        </div>
+                                        <div class="course_price ml-auto">Free</div>
+                                    </div>
+                                    <div class="course_title">
+                                        <h3><a href="{% url 'course_detail' course.id %}">{{ course.title }}</a></h3>
+                                    </div>
+                                    <div class="course_text">
+                                        <p>{{ course.description|truncatewords:15 }}</p>
+                                    </div>
+                                    <div class="course_footer d-flex align-items-center justify-content-start mt-3">
+                                        <div class="course_author_image">
+                                            {% if course.instructor.profile.image %}
+                                                <img src="{{ course.instructor.profile.image.url }}" alt="Instructor" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
+                                            {% else %}
+                                                <img src="{% static 'images/auther.jpeg' %}" alt="Instructor" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
+                                            {% endif %}
+                                        </div>
+                                        <div class="course_author_name ml-2">
+                                            By <a href="#">{% if course.instructor.first_name %}{{ course.instructor.first_name }} {{ course.instructor.last_name }}{% else %}{{ course.instructor.username }}{% endif %}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <!-- Static Fallback Cards -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="course">
+                            <div class="course_image"><img src="{% static 'images/course_1.jpg' %}" alt="" style="width: 100%; height: 220px; object-fit: cover;"></div>
+                            <div class="course_body">
+                                <div class="course_header d-flex flex-row align-items-center justify-content-start">
+                                    <div class="course_tag"><a href="#">Featured</a></div>
+                                    <div class="course_price ml-auto">Free</div>
+                                </div>
+                                <div class="course_title"><h3><a href="#">Python Logic & OOP</a></h3></div>
+                                <div class="course_text">Learn fundamentals of Python, object-oriented programming, and file handling.</div>
+                                <div class="course_footer d-flex align-items-center justify-content-start mt-3">
+                                    <div class="course_author_image"><img src="{% static 'images/featured_author.jpg' %}" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div>
+                                    <div class="course_author_name ml-2">By <a href="#">Lead Instructor</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="course">
+                            <div class="course_image"><img src="{% static 'images/course_2.jpg' %}" alt="" style="width: 100%; height: 220px; object-fit: cover;"></div>
+                            <div class="course_body">
+                                <div class="course_header d-flex flex-row align-items-center justify-content-start">
+                                    <div class="course_tag"><a href="#">New</a></div>
+                                    <div class="course_price ml-auto">Free</div>
+                                </div>
+                                <div class="course_title"><h3><a href="#">Django Web Framework</a></h3></div>
+                                <div class="course_text">Build dynamic web applications with Django views, templates, and models.</div>
+                                <div class="course_footer d-flex align-items-center justify-content-start mt-3">
+                                    <div class="course_author_image"><img src="{% static 'images/course_author_2.jpg' %}" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div>
+                                    <div class="course_author_name ml-2">By <a href="#">Senior Developer</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="course">
+                            <div class="course_image"><img src="{% static 'images/course_3.jpg' %}" alt="" style="width: 100%; height: 220px; object-fit: cover;"></div>
+                            <div class="course_body">
+                                <div class="course_header d-flex flex-row align-items-center justify-content-start">
+                                    <div class="course_tag"><a href="#">Featured</a></div>
+                                    <div class="course_price ml-auto">Free</div>
+                                </div>
+                                <div class="course_title"><h3><a href="#">Database Management</a></h3></div>
+                                <div class="course_text">Master SQLite schema architecture, indexing, and SQL queries.</div>
+                                <div class="course_footer d-flex align-items-center justify-content-start mt-3">
+                                    <div class="course_author_image"><img src="{% static 'images/course_author_3.jpg' %}" alt="" style="width: 35px; height: 35px; border-radius: 50%;"></div>
+                                    <div class="course_author_name ml-2">By <a href="#">Database Admin</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Section Fix -->
+    <div class="video py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1 text-center">
+                    <div class="video_container_outer" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+        src="https://www.youtube-nocookie.com/embed/5_MRXyYjHDk?origin=http://127.0.0.1:8000"
+        title="Course Preview Video"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+</iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Join Platform Banner Fix -->
+    <div class="join py-5" style="background-color: #ffffff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="section_title"><h2 style="font-size: 36px; font-weight: 700; color: #2e2151;">Join Our Platform Today</h2></div>
+                    <div class="section_subtitle mt-2" style="font-size: 16px; color: #6c757d;">Sign up now to access programming tutorials, source code, and developer projects.</div>
+                    <div class="mt-4">
+                        <a href="{% url 'register' %}" class="btn" style="background-color: #ff8a00; color: #ffffff; padding: 12px 35px; font-weight: 600; border-radius: 5px; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; display: inline-block; box-shadow: 0 4px 15px rgba(255, 138, 0, 0.3);">
+                            Register Now <i class="fa fa-angle-right ml-2" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

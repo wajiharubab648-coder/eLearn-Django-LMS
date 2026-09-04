@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="background: #f8fafc; padding-top: 130px; padding-bottom: 80px; min-height: 100vh;">
+    <div class="container">
+
+        <!-- Header -->
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 offset-lg-2">
+                <h1 style="color: #0f172a; font-weight: 800; font-size: 36px;">Get In Touch</h1>
+                <p style="color: #64748b; font-size: 16px;">Have questions? Send us a message and we will respond as soon as possible.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Left Info Panel -->
+            <div class="col-lg-4 mb-4">
+                <div style="background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; height: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                    <h4 style="color: #1e293b; font-weight: 700; margin-bottom: 25px;">Contact Info</h4>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <i class="fa fa-map-marker-alt text-warning mr-3" style="font-size: 20px; margin-top: 4px;"></i>
+                        <div>
+                            <h6 style="margin: 0; font-weight: 700; color: #334155;">Location</h6>
+                            <p style="color: #64748b; margin: 0; font-size: 14px;">Bahawalpur, Punjab, Pakistan</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <i class="fa fa-envelope text-warning mr-3" style="font-size: 20px; margin-top: 4px;"></i>
+                        <div>
+                            <h6 style="margin: 0; font-weight: 700; color: #334155;">Email Us</h6>
+                            <p style="color: #64748b; margin: 0; font-size: 14px;">contact@elearn.com</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start">
+                        <i class="fa fa-clock text-warning mr-3" style="font-size: 20px; margin-top: 4px;"></i>
+                        <div>
+                            <h6 style="margin: 0; font-weight: 700; color: #334155;">Working Hours</h6>
+                            <p style="color: #64748b; margin: 0; font-size: 14px;">Mon - Sat: 9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Contact Form -->
+            <div class="col-lg-8 mb-4">
+                <div style="background: #ffffff; padding: 35px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #334155; font-size: 14px;">Your Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter full name" required style="padding: 12px; border-radius: 8px;">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-weight: 600; color: #334155; font-size: 14px;">Your Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="name@example.com" required style="padding: 12px; border-radius: 8px;">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label style="font-weight: 600; color: #334155; font-size: 14px;">Subject</label>
+                            <input type="text" name="subject" class="form-control" placeholder="Inquiry topic" required style="padding: 12px; border-radius: 8px;">
+                        </div>
+
+                        <div class="mb-4">
+                            <label style="font-weight: 600; color: #334155; font-size: 14px;">Message</label>
+                            <textarea name="message" rows="5" class="form-control" placeholder="Write your message here..." required style="padding: 12px; border-radius: 8px;"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-warning text-white font-weight-bold" style="padding: 12px 30px; border-radius: 8px; font-size: 15px; background-color: #f59e0b; border: none;">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

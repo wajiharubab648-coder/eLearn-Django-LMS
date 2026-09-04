@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4" style="padding-top: 100px;">
+    <div class="row">
+        <!-- Main Video Area -->
+        <div class="col-lg-8 mb-4">
+            {% if active_lesson %}
+                <div class="embed-responsive embed-responsive-16by9 rounded shadow-sm bg-dark mb-3" style="min-height: 420px; position: relative;">
+                    <iframe
+    width="100%"
+    height="500"
+    src="{{ active_lesson.get_embed_url }}"
+    title="{{ active_lesson.title }}"
+    frameborder="0"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+</iframe>
+                </div>
+
+                <h3 class="font-weight-bold text-dark mt-2 mb-1">{{ active_lesson.title }}</h3>
+                <p class="text-muted small mb-3">
+                    Course: <strong>{{ course.title }}</strong> | Category: <strong>{{ course.category.name|default:"General" }}</strong>
+                </p>
+            {% else %}
+                <div class="alert alert-warning">No lessons available for this course.</div>
+            {% endif %}
+
+            <hr>
+            <h5 class="font-weight-bold mb-2">About Course</h5>
+            <p class="text-secondary" style="line-height: 1.6;">{{ course.description }}</p>
+        </div>
+
+        <!-- Right Side Lessons List -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header text-white font-weight-bold" style="background-color: #07294d;">
+                    Course Content ({{ lessons.count }})
+                </div>
+                <div class="list-group list-group-flush" style="max-height: 450px; overflow-y: auto;">
+                    {% for lesson in lessons %}
+                        <a href="?lesson={{ lesson.id }}"
+                           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if active_lesson.id == lesson.id %}active{% endif %}">
+                            <div class="text-truncate mr-2">
+                                <small class="font-weight-bold mr-1">#{{ lesson.order }}</small>
+                                <span>{{ lesson.title }}</span>
+                            </div>
+                            {% if lesson.duration %}
+                                <span class="badge badge-light text-dark border">{{ lesson.duration }}</span>
+                            {% endif %}
+                        </a>
+                    {% empty %}
+                        <div class="p-3 text-muted text-center small">No lessons available.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

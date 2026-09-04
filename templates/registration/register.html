@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Register Section -->
+<div class="super_container_inner" style="padding-top: 150px; padding-bottom: 100px; background: #f2f4f5;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card border-0 shadow-lg rounded-lg">
+                    <div class="card-body p-5">
+                        <h2 class="text-center font-weight-bold mb-4" style="color: #1a1a1a;">Register</h2>
+
+
+
+                        {% include 'partials/messages.html' %}
+
+                        <form method="POST" action="{% url 'register' %}">
+                            {% csrf_token %}
+
+                            <div class="form-group mb-3">
+                                <label class="text-muted small">Username *</label>
+                                <input type="text" name="username" class="form-control form-control-lg" placeholder="Enter username" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="text-muted small">First Name</label>
+                                <input type="text" name="first_name" class="form-control form-control-lg" placeholder="Enter first name">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="text-muted small">Last Name</label>
+                                <input type="text" name="last_name" class="form-control form-control-lg" placeholder="Enter last name">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="text-muted small">Email address *</label>
+                                <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="text-muted small">Password *</label>
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" required>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label class="text-muted small">Confirm Password *</label>
+                                <input type="password" name="confirm_password" class="form-control form-control-lg" placeholder="Confirm password" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-warning btn-block text-white font-weight-bold py-3" style="background-color: #fb297b; border: none; border-radius: 5px;">
+                                Register Now
+                            </button>
+
+                            <div class="text-center mt-4">
+                                <p class="mb-0 text-muted">Already have an account? <a href="{% url 'login' %}" style="color: #fb297b;" class="font-weight-bold">Login here</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
