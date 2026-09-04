@@ -1,4 +1,9 @@
-*.js linguist-detectable=false
-*.css linguist-detectable=false
-static/* linguist-vendored
-plugins/* linguist-vendored
+# Exclude all static web assets from language stats
+*.js linguist-vendored
+*.css linguist-vendored
+*.html linguist-vendored
+
+# Ignore subfolders containing vendors
+static/** linguist-vendored
+plugins/** linguist-vendored
+
