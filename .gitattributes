@@ -1,3 +1,11 @@
-* linguist-vendored
-*.py linguist-vendored=false
+# Force Python as the primary repository language
+*.py linguist-detectable=true
+*.html linguist-detectable=false
+*.js linguist-detectable=false
+*.css linguist-detectable=false
+
+# Treat templates and static folders as vendored
+templates/** linguist-vendored
+static/** linguist-vendored
+
 
