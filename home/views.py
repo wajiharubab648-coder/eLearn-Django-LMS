@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
@@ -129,12 +131,23 @@ def contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
 
+        # 1. Database mein save karein
         ContactMessage.objects.create(
             name=name,
             email=email,
             subject=subject,
             message=message
         )
+
+        # 2. Email alert bhejein
+        send_mail(
+            subject=f"PySchool Contact: {subject}",
+            message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=['wajiharubab648@gmail.com'],  # Aap ki main email
+            fail_silently=True,
+        )
+
         messages.success(request, "Your message has been sent successfully!")
         return redirect('contact')
 
